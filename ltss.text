@@ -1,0 +1,58 @@
+#define NOTE_F6  1397
+#define NOTE_G4  392
+
+int LED=13; //red led
+int LED2 = 8; //green led
+
+int alarmSpeaker = 7;
+int Laser = 12;
+int LaserSensor = 2;
+int SensorReading = HIGH;
+
+
+void setup() 
+ {
+  pinMode(LED, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(Laser,OUTPUT);
+  pinMode(alarmSpeaker, OUTPUT);
+  pinMode(LaserSensor, INPUT);
+
+ }
+ 
+
+void alarmTone()
+  {
+  tone(7,  NOTE_F6, 400);
+  delay(100);
+
+ }
+
+void alarm() 
+ {
+              delay(300); //Time before alarm starts
+              alarmTone();
+
+ }
+ 
+
+void loop() 
+{
+   
+  digitalWrite(Laser, HIGH);
+  SensorReading = digitalRead(LaserSensor);
+
+  if(SensorReading == LOW)
+    {
+            digitalWrite(LED,HIGH);
+            digitalWrite(LED2,LOW);
+            alarm();
+                 }
+             else
+                {
+                       digitalWrite(LED,LOW);
+                       digitalWrite(LED2,HIGH);
+                }
+ 
+ 
+ }
